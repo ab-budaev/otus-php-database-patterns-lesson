@@ -40,7 +40,7 @@ class User
     {
         $this->selectStatement->execute([$id]);
 
-        return $this->selectStatement->fetch(PDO::FETCH_ASSOC);
+        return $this->selectStatement->fetch(PDO::FETCH_OBJ);
     }
 
     public function insert(
@@ -65,8 +65,6 @@ class User
         string $email,
     ): bool
     {
-        $this->updateStatement->setFetchMode(PDO::FETCH_ASSOC);
-
         return $this->updateStatement->execute([
             $firstName,
             $lastName,

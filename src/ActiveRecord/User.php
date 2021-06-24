@@ -106,16 +106,12 @@ class User
         return $this;
     }
 
-    public function insert(
-        string $firstName,
-        string $lastName,
-        string $email
-    ): int
+    public function insert(): int
     {
         $this->insertStatement->execute([
-            $firstName,
-            $lastName,
-            $email,
+            $this->firstName,
+            $this->lastName,
+            $this->email,
         ]);
 
         $this->id = (int)$this->pdo->lastInsertId();
@@ -123,20 +119,13 @@ class User
         return $this->id;
     }
 
-    public function update(
-        int $id,
-        string $firstName,
-        string $lastName,
-        string $email,
-    ): bool
+    public function update(): bool
     {
-        $this->updateStatement->setFetchMode(PDO::FETCH_ASSOC);
-
         return $this->updateStatement->execute([
-            $firstName,
-            $lastName,
-            $email,
-            $id,
+            $this->firstName,
+            $this->lastName,
+            $this->email,
+            $this->id,
         ]);
     }
 
@@ -147,5 +136,15 @@ class User
         $this->id = null;
 
         return $result;
+    }
+
+    public function getSalary(): float
+    {
+        return 0.0;
+    }
+
+    public function getFullName(): string
+    {
+        return $this->firstName . ' ' . $this->lastName;
     }
 }

@@ -102,8 +102,6 @@ class User
 
     public function update(): bool
     {
-        $this->updateStatement->setFetchMode(PDO::FETCH_ASSOC);
-
         return $this->updateStatement->execute([
             $this->firstName,
             $this->lastName,
@@ -112,9 +110,9 @@ class User
         ]);
     }
 
-    public function delete(int $id): bool
+    public function delete(): bool
     {
-        $result = $this->deleteStatement->execute([$id]);
+        $result = $this->deleteStatement->execute([$this->id]);
 
         $this->id = null;
 
